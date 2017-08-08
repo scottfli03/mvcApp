@@ -49,7 +49,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public String addCustomer(@ModelAttribute("customer") Customer c) {
 		System.out.println(c);
 		if (c.getCustomerID() == 0) {
