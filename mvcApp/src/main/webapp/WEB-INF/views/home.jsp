@@ -8,7 +8,7 @@
 <h1>
 	Won't you buy a fence?  
 </h1>
-<h3>${ name }</h3>
+<a href="admin">ADMIN</a>
 
 <P>  The time is ${serverTime}. You should buy a fence.</P>
 <form action="/mvcapp/home" method="post">

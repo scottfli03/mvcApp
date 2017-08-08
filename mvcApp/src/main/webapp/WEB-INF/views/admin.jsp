@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Welcome $ {fName}</title>
+<title>Admin</title>
 </head>
 <body>
-Welcome ${fName}.
+
+The time is ${serverTime}
 </body>
 </html>
