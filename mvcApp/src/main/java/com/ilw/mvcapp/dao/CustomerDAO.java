@@ -12,7 +12,9 @@ import com.ilw.mvcapp.model.Customer;
  *
  */
 public interface CustomerDAO {
-	public void addCustomer(Customer c);
-	
-	public List<Customer> listCustomers();
+	 public Customer addCustomer(Customer customer);
+	 public Customer updateCustomer(Customer customer);
+	 public Customer deleteCustomer(long customerID);
+	 public Customer getCustomer(long customerID);
+	 public List<Customer> getCustomers();
 }

@@ -15,50 +15,50 @@
 		<a href="admin">ADMIN</a>
 		
 		<P>  The time is ${serverTime}. You should buy a fence.</P>
-		<form action="/mvcapp/home" method="post">
+		<form action="/mvcapp/customer/add" method="post">
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">First Name</div><input type="text" class="form-control" id="form-cust txtFName" name="fName">
+					<div class="input-group-addon">First Name</div><input type="text" class="form-control" id="form-cust txtFName" value="${customer.fName}" name="fName">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">Last Name</div><input type="text" class="form-control" id="form-cust txtLName" name="lName">
+					<div class="input-group-addon">Last Name</div><input type="text" class="form-control" id="form-cust txtLName" value="${customer.lName}" name="lName">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">Email</div><input type="text" class="form-control" id="form-cust txtEmail" name="email">
+					<div class="input-group-addon">Email</div><input type="text" class="form-control" id="form-cust txtEmail" value="${customer.email}" name="email">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">Phone</div><input type="text" class="form-control" id="form-cust txtPhone" name="phone">
+					<div class="input-group-addon">Phone</div><input type="text" class="form-control" id="form-cust txtPhone" value="${customer.phone}" name="phone">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">Address line 1</div><input type="text" class="form-control" id="form-cust txtAddr1" name="addr1">
+					<div class="input-group-addon">Address line 1</div><input type="text" class="form-control" id="form-cust txtAddr1" value="${customer.addr1}" name="addr1">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">Address line 2</div><input type="text" class="form-control" id="form-cust txtAddr2" name="addr2">
+					<div class="input-group-addon">Address line 2</div><input type="text" class="form-control" id="form-cust txtAddr2" value="${customer.addr2}" name="addr2">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">City</div><input type="text" id="form-cust txtCity" class="form-control" name="city">
+					<div class="input-group-addon">City</div><input type="text" id="form-cust txtCity" class="form-control" value="${customer.city}" name="city">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">State</div><input type="text" id="form-cust txtState" class="form-control" name="state">
+					<div class="input-group-addon">State</div><input type="text" id="form-cust txtState" class="form-control" value="${customer.state}" name="state">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="input-group">
-					<div class="input-group-addon">Zip</div><input type="text" id="form-cust txtZip" class="form-control" name="zip">
+					<div class="input-group-addon">Zip</div><input type="text" id="form-cust txtZip" class="form-control" value="${customer.zip}" name="zip">
 				</div>
 			</div>
 			<button class="btn btn-primary">Submit</button>

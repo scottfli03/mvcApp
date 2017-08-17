@@ -8,12 +8,11 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.ilw.mvcapp.model.Customer;
 
@@ -27,19 +26,40 @@ public class CustomerDAOImpl implements CustomerDAO {
 	final Logger logger = LoggerFactory.getLogger(CustomerDAOImpl.class);
 	
 	@PersistenceContext
-	private EntityManager em;
+	public EntityManager entityManager;
 	
-	@Override
-	public void addCustomer(Customer c) {
-		em.persist(c);
+	@Transactional(readOnly=false)
+	public Customer addCustomer(Customer customer) {
+		entityManager.persist(customer);
+		return customer;
 	}
-
-	@Override
-	public List<Customer> listCustomers() {
-	      CriteriaQuery<Customer> criteriaQuery = em.getCriteriaBuilder().createQuery(Customer.class);
-	      @SuppressWarnings("unused")
-	      Root<Customer> root = criteriaQuery.from(Customer.class);
-	      return em.createQuery(criteriaQuery).getResultList();
+	
+	@Transactional(readOnly=false)
+	public Customer updateCustomer(Customer customer) {
+		entityManager.merge(customer);
+		return customer;
 	}
-
+	
+	@Transactional(readOnly=false)
+	public Customer deleteCustomer(long customerID) {
+		Customer customer = getCustomer(customerID);
+		entityManager.remove(customer);
+		return customer;
+	}
+	
+	@Transactional(readOnly=true)
+	public Customer getCustomer(long customerID) {
+		System.out.println("select customer from Customer customer where customer.customerId="+customerID);
+		String sql = "select customer from Customer customer where customer.customerId="+customerID;
+		try{
+			return (Customer) entityManager.createQuery(sql).getSingleResult();
+		}catch(Exception e){
+		}
+		return null;
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Customer> getCustomers() {
+		return entityManager.createQuery("select customer from Customer customer").getResultList();
+	}
 }

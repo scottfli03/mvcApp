@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ilw.mvcapp.dao.CustomerDAO;
 import com.ilw.mvcapp.model.Customer;
 
-@Service
+@Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
 	
 	@Autowired
@@ -17,12 +17,29 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Transactional
 	@Override
-	public void addCustomer(Customer c) {
-		this.customerDAO.addCustomer(c);
+	public Customer addCustomer(Customer c) {
+		System.out.println("customer: "+c.toString());
+		return this.customerDAO.addCustomer(c);
+	}
+	
+	@Override
+	public List<Customer> getAllCustomers() {
+		return this.customerDAO.getCustomers();
 	}
 
 	@Override
-	public List<Customer> listCustomers() {
-		return this.customerDAO.listCustomers();
+	public Customer updateCustomer(Customer c) {
+		return this.customerDAO.updateCustomer(c);
+	}
+
+	@Override
+	public Customer deleteCustomer(long customerID) {
+		return this.customerDAO.deleteCustomer(customerID);
+		
+	}
+
+	@Override
+	public Customer getCustomer(long customerID) {
+		return this.customerDAO.getCustomer(customerID);
 	}
 }
