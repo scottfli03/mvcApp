@@ -3,8 +3,11 @@
  */
 package com.ilw.mvcapp.dao;
 
+
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +31,11 @@ public class ListDAOImpl implements ListDAO {
 		this.entityManager.persist(list);
 		return list;
 	}
+	
+	@Transactional(readOnly=true)
+	public boolean ableToConnected() {
+		return this.entityManager.isOpen();
+	}
 
 	@Transactional(readOnly=false)
 	public List updateList(List list) {
@@ -37,6 +45,7 @@ public class ListDAOImpl implements ListDAO {
 
 	@Transactional(readOnly=false)
 	public List deleteList(long listID) {
+		System.out.println("ListDAO Delete - listID = "+listID);
 		List list = getList(listID);
 		entityManager.remove(list);
 		return list;
@@ -44,17 +53,20 @@ public class ListDAOImpl implements ListDAO {
 
 	@Transactional(readOnly=true)
 	public List getList(long listID) {
-		System.out.println("select list from List list where list.listId="+listID);
-		String sql = "select list from List list where list.listId="+listID;
+		System.out.println("select list from List list where list.listID=:listID");
+		String sql = "select list from List list where list.listID = :listID";
 		try{
-			return (List) entityManager.createQuery(sql).getSingleResult();
+			Query q = entityManager.createQuery(sql);
+			q.setParameter("listID", listID);
+			return (List) q.getSingleResult();
 		}catch(Exception e){
+			System.out.println(e.toString());
 		}
 		return null;
 	}
 
 	@Transactional(readOnly=true)
 	public java.util.List<List> getLists() {
-		return entityManager.createQuery("select list from List list").getResultList();
+		return entityManager.createQuery("select l from List l").getResultList();
 	}
 }

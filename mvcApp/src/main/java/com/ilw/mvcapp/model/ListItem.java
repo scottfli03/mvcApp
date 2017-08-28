@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.mysql.cj.jdbc.Blob;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Scott
@@ -29,9 +29,10 @@ public class ListItem {
 	@Column(name = "itemID")
 	private long itemID;
 	
-//    @ManyToOne
-//    @JoinColumn(name = "listID")
-//	private List list;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "listID", nullable=false)
+    @JsonIgnore
+	private List list;
 	
 	@Column(name = "title")
 	private String title;
@@ -48,9 +49,9 @@ public class ListItem {
 	 * @param description
 	 * @param completed
 	 */
-//	public ListItem(List list, String title, String description, Boolean completed) {
-//		this.list = list;
-	public ListItem(String title, String description, Boolean completed) {
+	public ListItem(List list, String title, String description, Boolean completed) {
+		this.list = list;
+//	public ListItem(String title, String description, Boolean completed) {
 		this.title = title;
 		this.description = description;
 		this.completed = completed;
@@ -72,19 +73,19 @@ public class ListItem {
 		this.itemID = itemID;
 	}
 
-//	/**
-//	 * @return the listID
-//	 */
-//	public List getList() {
-//		return this.list;
-//	}
-//
-//	/**
-//	 * @param listID the listID to set
-//	 */
-//	public void setList(List list) {
-//		this.list = list;
-//	}
+	/**
+	 * @return the listID
+	 */
+	public List getList() {
+		return this.list;
+	}
+
+	/**
+	 * @param listID the listID to set
+	 */
+	public void setList(List list) {
+		this.list = list;
+	}
 
 	/**
 	 * @return the title

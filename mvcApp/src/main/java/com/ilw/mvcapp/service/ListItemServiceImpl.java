@@ -3,7 +3,7 @@
  */
 package com.ilw.mvcapp.service;
 
-import java.util.List;
+import com.ilw.mvcapp.model.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,15 +23,15 @@ public class ListItemServiceImpl implements ListItemService {
 	private ListItemDAO itemDAO;
 	
 	@Override
-	public ListItem addListItem(ListItem item) {
+	public ListItem addListItem(List list, ListItem item) {
 		// TODO Auto-generated method stub
-		return this.itemDAO.addListItem(item);
+		return this.itemDAO.addListItem(list, item);
 	}
 
 	@Override
-	public List<ListItem> getAllListItems() {
+	public java.util.List<ListItem> getListItems(List list) {
 		// TODO Auto-generated method stub
-		return this.itemDAO.getListItems();
+		return this.itemDAO.getListItems(list);
 	}
 
 	@Override

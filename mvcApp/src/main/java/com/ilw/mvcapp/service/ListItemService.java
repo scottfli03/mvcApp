@@ -3,7 +3,7 @@
  */
 package com.ilw.mvcapp.service;
 
-import java.util.List;
+import com.ilw.mvcapp.model.List;
 import com.ilw.mvcapp.model.ListItem;
 
 /**
@@ -11,8 +11,8 @@ import com.ilw.mvcapp.model.ListItem;
  *
  */
 public interface ListItemService {
-	public ListItem addListItem(ListItem item);
-	public List<ListItem> getAllListItems();
+	public ListItem addListItem(List list, ListItem item);
+	public java.util.List<ListItem> getListItems(List list);
 	public ListItem getListItem(long itemID);
 	public ListItem updateListItem(ListItem item);
 	public ListItem deleteListItem(long itemID);

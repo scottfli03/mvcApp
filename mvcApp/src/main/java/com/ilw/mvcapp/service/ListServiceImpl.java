@@ -44,4 +44,9 @@ public class ListServiceImpl implements ListService{
 		return listDAO.deleteList(listID);
 	}
 	
+	@Override
+	public boolean ableToConnect() {
+		return listDAO.ableToConnected();
+	}
+	
 }

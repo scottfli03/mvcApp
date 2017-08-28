@@ -4,6 +4,7 @@
 package com.ilw.mvcapp.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,11 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
 
 /**
  * @author Scott
@@ -27,6 +25,14 @@ import org.hibernate.annotations.Fetch;
 @Table(name = "List")
 public class List {
 	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "List [listID=" + listID + ", title=" + title + ", listItems=" + listItems.toString() + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "listID")
@@ -35,11 +41,13 @@ public class List {
 	@Column(name = "title")
 	private String title;
 	
-	@OneToMany(fetch = FetchType.EAGER,
+	@OneToMany(
+			mappedBy = "list",
+			fetch = FetchType.EAGER,
 			cascade = CascadeType.ALL, 
 	        orphanRemoval = true)
-	@JoinColumn(name = "listID")
-	private java.util.List<ListItem> listItems = new ArrayList<ListItem>();
+//	@Transient
+	private Collection<ListItem> listItems = new ArrayList<ListItem>();
 
 	/**
 	 * @return the itemID
@@ -72,7 +80,7 @@ public class List {
 	/**
 	 * @return the listItems
 	 */
-	public java.util.List<ListItem> getListItems() {
+	public Collection<ListItem> getListItems() {
 		return listItems;
 	}
 
@@ -83,13 +91,13 @@ public class List {
 		this.listItems = listItems;
 	}
 	
-//    public void addListItem(ListItem item) {
-//    	this.listItems.add(item);
-//    	item.setList(this);
-//    }
-// 
-//    public void removeListItem(ListItem item) {
-//        this.listItems.remove(item);
-//        item.setList(null);
-//    }
+    public void addListItem(ListItem item) {
+    	this.listItems.add(item);
+    	item.setList(this);
+    }
+ 
+    public void removeListItem(ListItem item) {
+        this.listItems.remove(item);
+        item.setList(null);
+    }
 }

@@ -15,4 +15,5 @@ public interface ListDAO {
 	 public List deleteList(long listID);
 	 public List getList(long listID);
 	 public java.util.List<List> getLists();
+	 public boolean ableToConnected();
 }

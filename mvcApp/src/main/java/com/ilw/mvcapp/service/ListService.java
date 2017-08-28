@@ -15,4 +15,5 @@ public interface ListService {
 	public List getList(long listID);
 	public List updateList(List c);
 	public List deleteList(long listID);
+	public boolean ableToConnect();
 }
